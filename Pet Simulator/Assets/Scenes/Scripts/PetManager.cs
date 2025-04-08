@@ -1,16 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PetManager : MonoBehaviour
 {
-    public PetController pet;
+    [SerializeField] private PetController pet;
+    [SerializeField] private Slider hungerBar;
+    [SerializeField] private float hungerTime = 60f;
     public float petMoveTimer, originalpetMoveTimer;
     public Transform[] waypoints;
+    public float foodValue = 50f;
     
      private void Awake()
     {
         originalpetMoveTimer = petMoveTimer;
+    }
+
+    private void Start()
+    {
+        
+        hungerBar.minValue = 0f;  
+        hungerBar.maxValue = 100f; 
+        hungerBar.value = foodValue;  
+        StartCoroutine(DecreaseFoodValue());
+
     }
     // Update is called once per frame
     void Update()
@@ -24,6 +38,8 @@ public class PetManager : MonoBehaviour
             MovePetToRandomWaypoint();
             petMoveTimer = originalpetMoveTimer;
         }
+
+        
     }
 
     private void MovePetToRandomWaypoint()
@@ -37,7 +53,34 @@ public class PetManager : MonoBehaviour
         pet.Move(destination);
     }
 
+    public void AddFood()
+    {
+        foodValue += 25f;
+        hungerBar.value = foodValue;
+        if (foodValue > 50f)
+        {
+            pet.Happy();
+        }
+    }
 
+    private IEnumerator DecreaseFoodValue()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(hungerTime);
+            if (foodValue > 0f)
+            {
+                foodValue -= 25f;
+                foodValue = Mathf.Max(foodValue, 0f);
+                hungerBar.value = foodValue;
+            }
 
+            if (foodValue < 50f)
+            {
+                pet.Sad();
+            }
+
+        }
+    }
 
 }

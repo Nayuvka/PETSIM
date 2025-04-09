@@ -153,8 +153,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoopPrefab: {fileID: 8805041396477625832, guid: ca4560b8432f13a4cbce82e0d41f8128, type: 3}
   Radius: 8
-  MinSpawnTime: 1
-  MaxSpawnTime: 5
+  MinSpawnTime: 15
+  MaxSpawnTime: 20
 --- !u!4 &44969212
 Transform:
   m_ObjectHideFlags: 0

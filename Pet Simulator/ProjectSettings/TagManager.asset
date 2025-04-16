@@ -7,6 +7,9 @@ TagManager:
   - Pet
   - Bin
   - Poop
+  - nameTag
+  - Name Input
+  - Name Tag
   layers:
   - Default
   - TransparentFX

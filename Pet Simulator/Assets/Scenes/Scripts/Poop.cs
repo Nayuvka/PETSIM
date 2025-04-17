@@ -39,6 +39,13 @@ public class Poop : MonoBehaviour
         if (other.CompareTag("Bin"))
         {
             isOverBin = true;
+
+            // Trigger shake animation via Animator
+            Bin bin = other.GetComponent<Bin>();
+            if (bin != null)
+            {
+                bin.Shake();
+            }
         }
     }
 
